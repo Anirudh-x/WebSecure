@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.light {
+  --dark: 0, 1, 48;
+  --lessdark: 4, 2, 98;
+  --light: 255, 255, 255;
+}
+
