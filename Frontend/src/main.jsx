@@ -13,6 +13,8 @@ import Tools from "./pages/Tools/Tools.jsx"
 import Technology from "./pages/Technology/Technology.jsx"
 import Contact from "./pages/Contact/Contact.jsx"
 import IPResolver from "./pages/ToolsPages/IPResolver.jsx";
+import NetworkScanner from "./pages/ToolsPages/NetworkScanner.jsx";
+import IPGeolocation from "./pages/ToolsPages/IPGeolocation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,15 @@ const router = createBrowserRouter([
             path: "/tools/ip",
             element: <IPResolver />
           },
+          {
+            path: "/tools/netscan",
+            element: <NetworkScanner />
+          },
+          {
+            path: "/tools/location",
+            element: <IPGeolocation />
+          },
+          
         ]
       },
       {
