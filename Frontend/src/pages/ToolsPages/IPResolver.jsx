@@ -30,7 +30,10 @@ const IPResolver = () => {
   };
 
   return (
-    <div className=" text-white p-[10rem] rounded-[3rem] flex flex-col gap-5 backdrop-blur-lg bg-opacity-20 bg-orange-400">
+    <div className=" text-white p-[10rem] rounded-[3rem] flex flex-col gap-5 backdrop-blur-lg bg-opacity-20 bg-orange-400 fixed left-[32rem] top-[7rem] z-[99]">
+      <Link to="/tools" className="fixed top-[3rem] right-[4rem] text-2xl">
+        x
+      </Link>
       <div className="flex flex-col items-center gap-5">
         <h1>IP Resolver</h1>
         <input

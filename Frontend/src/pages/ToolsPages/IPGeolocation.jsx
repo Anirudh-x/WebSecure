@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link, Outlet } from "react-router-dom";
 
 const IPGeolocation = () => {
   const [ipAddress, setIpAddress] = useState("");
@@ -23,7 +24,10 @@ const IPGeolocation = () => {
   };
 
   return (
-    <div className="text-white p-[10rem] rounded-[3rem] flex flex-col gap-5 backdrop-blur-lg bg-opacity-20 bg-orange-400">
+    <div className="text-white p-[10rem] rounded-[3rem] flex flex-col gap-5 backdrop-blur-lg bg-opacity-20 bg-orange-400 fixed left-[32rem] top-[7rem] z-[99]">
+      <Link to="/tools" className="fixed top-[3rem] right-[4rem] text-2xl">
+        x
+      </Link>
       <h1 className="text-3xl font-bold mb-6">IP Geolocation Tool</h1>
       <form onSubmit={handleSubmit} className="w-full max-w-md bg-opacity-10 bg-orange-300 p-6 rounded-lg shadow-md">
         <div className="mb-4">

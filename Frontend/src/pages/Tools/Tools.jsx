@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
+// Icons
 import { MdOutlineDns } from "react-icons/md";
 import { LuNetwork } from "react-icons/lu";
 import { FaLocationCrosshairs } from "react-icons/fa6";
@@ -9,8 +10,8 @@ const Tools = () => {
   const [funPage, setFunPage] = useState(false);
 
   return (
-    <div className="w-full h-full py-32 flex justify-center">
-      <div className="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-24 px-20">
+    <div className="w-full h-[100vh] py-32 flex justify-center">
+      <div className="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-24 px-20 h-[22rem]">
         
         <div className="border w-[17rem] rounded-xl shadow-2xl flex flex-col items-center text-center gap-5 p-10 backdrop-blur-sm justify-between">
           <p>
@@ -61,7 +62,7 @@ const Tools = () => {
         </div>
 
       </div>
-      <div className="fixed flex justify-center items-center w-[70%] h-[50%] z-[99]">
+      <div className="">
         <Outlet />
       </div>
     </div>

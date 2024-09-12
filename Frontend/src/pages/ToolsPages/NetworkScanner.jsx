@@ -1,6 +1,7 @@
 // src/NetworkScanner.js
 import React, { useState } from "react";
 import axios from "axios";
+import { Link, Outlet } from "react-router-dom";
 
 const NetworkScanner = () => {
   const [target, setTarget] = useState("");
@@ -64,7 +65,10 @@ const NetworkScanner = () => {
   };
 
   return (
-    <div className="text-white p-[10rem] rounded-[3rem] flex flex-col gap-5 backdrop-blur-lg bg-opacity-20 bg-orange-400">
+    <div className="text-white p-[10rem] rounded-[3rem] flex flex-col gap-5 backdrop-blur-lg bg-opacity-20 bg-orange-400 fixed left-[32rem] top-[7rem] z-[99]">
+      <Link to="/tools" className="fixed top-[3rem] right-[4rem] text-2xl">
+        x
+      </Link>
       <div className="flex flex-col items-center gap-5">
         <h1>Network Scanner</h1>
         <input
@@ -72,7 +76,7 @@ const NetworkScanner = () => {
           value={target}
           onChange={(e) => setTarget(e.target.value)}
           placeholder="Enter domain or IP address"
-          className="text-black text-center py-2 rounded-md "
+          className="text-black text-center py-2 px-2 w-[13rem] rounded-md "
         />
         <button onClick={handleScan} className="border px-3 py-1">
           Scan
