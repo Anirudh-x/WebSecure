@@ -2,15 +2,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, Outlet } from "react-router-dom";
+import loadingAnimation from "../../assets/loading.webm"
 
 const NetworkScanner = () => {
   const [target, setTarget] = useState("");
   const [scanResult, setScanResult] = useState(null);
   const [error, setError] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const handleScan = async () => {
     setError("");
     setScanResult(null);
+    setLoading(true);
     try {
       const response = await axios.post("http://127.0.0.1:5000/scan", {
         target,
@@ -18,6 +22,8 @@ const NetworkScanner = () => {
       setScanResult(response.data);
     } catch (err) {
       setError("An error occurred during the scan.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,6 +90,22 @@ const NetworkScanner = () => {
 
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
+
+      {loading && (
+        <div className="flex justify-center items-center my-4">
+          <video
+            className="w-32 h-32"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src={loadingAnimation} type="video/webm" />
+            Your browser does not support the WebM video format.
+          </video>
+        </div>
+      )}
+
       <div className="border rounded-lg flex flex-col gap-2 p-4 ">
         {scanResult && (
           <div className="flex flex-col gap-3">

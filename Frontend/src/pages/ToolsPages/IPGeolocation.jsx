@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, Outlet } from "react-router-dom";
+import loadingAnimation from "../../assets/loading.webm";
 
 const IPGeolocation = () => {
   const [ipAddress, setIpAddress] = useState("");
   const [locationInfo, setLocationInfo] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     setLocationInfo(null);
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -20,6 +23,8 @@ const IPGeolocation = () => {
       setLocationInfo(response.data);
     } catch (err) {
       setError("Error fetching geolocation information.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,7 +34,10 @@ const IPGeolocation = () => {
         x
       </Link>
       <h1 className="text-3xl font-bold mb-6">IP Geolocation Tool</h1>
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-opacity-10 bg-orange-300 p-6 rounded-lg shadow-md">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-opacity-10 bg-orange-300 p-6 rounded-lg shadow-md"
+      >
         <div className="mb-4">
           <input
             type="text"
@@ -48,23 +56,49 @@ const IPGeolocation = () => {
         </button>
       </form>
       {error && <p className="mt-4 text-red-500">{error}</p>}
+      {loading && (
+        <div className="flex justify-center items-center my-4">
+          <video className="w-32 h-32" autoPlay loop muted playsInline>
+            <source src={loadingAnimation} type="video/webm" />
+            Your browser does not support the WebM video format.
+          </video>
+        </div>
+      )}
       {locationInfo && (
         <div className="mt-6 bg-opacity-10 bg-orange-300 p-4 rounded-lg shadow-md w-full max-w-md">
-          <h2 className="text-2xl font-semibold mb-4">IP Geolocation Information:</h2>
-          <p><strong>IP Address:</strong> {locationInfo.ip}</p>
-          <p><strong>Hostname:</strong> {locationInfo.hostname}</p>
-          <p><strong>City:</strong> {locationInfo.city}</p>
-          <p><strong>Region:</strong> {locationInfo.region}</p>
-          <p><strong>Country:</strong> {locationInfo.country}</p>
-          <p><strong>Latitude:</strong> {locationInfo.latitude}</p>
-          <p><strong>Longitude:</strong> {locationInfo.longitude}</p>
+          <h2 className="text-2xl font-semibold mb-4">
+            IP Geolocation Information:
+          </h2>
+          <p>
+            <strong>IP Address:</strong> {locationInfo.ip}
+          </p>
+          <p>
+            <strong>Hostname:</strong> {locationInfo.hostname}
+          </p>
+          <p>
+            <strong>City:</strong> {locationInfo.city}
+          </p>
+          <p>
+            <strong>Region:</strong> {locationInfo.region}
+          </p>
+          <p>
+            <strong>Country:</strong> {locationInfo.country}
+          </p>
+          <p>
+            <strong>Latitude:</strong> {locationInfo.latitude}
+          </p>
+          <p>
+            <strong>Longitude:</strong> {locationInfo.longitude}
+          </p>
           {locationInfo.exact_location && (
-            <p><strong>Exact Location:</strong> {locationInfo.exact_location}</p>
+            <p>
+              <strong>Exact Location:</strong> {locationInfo.exact_location}
+            </p>
           )}
         </div>
       )}
     </div>
   );
-}
+};
 
 export default IPGeolocation;

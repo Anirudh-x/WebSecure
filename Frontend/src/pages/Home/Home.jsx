@@ -13,14 +13,19 @@ const Home = () => {
 
             <TypeAnimation
               className="text-orange-400"
-              sequence={["Let it be secure.", 2000, "We Respect Your Privacy.", 2000]}
+              sequence={[
+                "Let it be secure.",
+                2000,
+                "We Respect Your Privacy.",
+                2000,
+              ]}
               wrapper="span"
               speed={25}
               style={{ fontSize: "1.5em", display: "inline-block" }}
               repeat={Infinity}
             />
 
-            <button className="border-4 bg-transparent h-16 w-44 font-semibold text-[18px] text-white hover:bg-white hover:text-orange-400 hover:rounded-[20rem]">
+            <button className="border-2 rounded-[20rem] h-16 w-44 font-semibold text-[18px] text-orange-400 bg-transparent border-orange-400 hover:shadow-orange-300 hover:shadow-[0px_0px_60px_15px]">
               Learn More
             </button>
           </div>

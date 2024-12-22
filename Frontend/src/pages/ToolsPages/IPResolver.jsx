@@ -2,17 +2,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import loadingAnimation from "../../assets/loading.webm"
 
 const IPResolver = () => {
   const [domain, setDomain] = useState("");
   const [ipv4Addresses, setIpv4Addresses] = useState([]);
   const [ipv6Addresses, setIpv6Addresses] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleResolve = async () => {
     setError("");
     setIpv4Addresses([]);
     setIpv6Addresses([]);
+    setLoading(true);
     try {
       const response = await axios.post("http://127.0.0.1:5000/resolve", {
         domain,
@@ -26,6 +29,8 @@ const IPResolver = () => {
       }
     } catch (err) {
       setError("An error occurred while resolving the domain.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,6 +54,16 @@ const IPResolver = () => {
 
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
+
+      {loading && (
+        <div className="flex justify-center items-center my-4">
+          <video className="w-32 h-32" autoPlay loop muted playsInline>
+            <source src={loadingAnimation} type="video/webm" />
+            Your browser does not support the WebM video format.
+          </video>
+        </div>
+      )}
+
       <div className="border rounded-lg flex flex-col gap-2 p-4 ">
         <div>
           <h3>IPv4 Addresses:</h3>
